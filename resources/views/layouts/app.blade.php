@@ -73,8 +73,49 @@
                 </div>
             </div>
         </nav> --}}
-        <top-bar :model ="{{Auth::user()}}">IntelliRehab</top-bar>
-        <side-bar></side-bar>
+        {{-- <top-bar :model ="{{Auth::user()}}">IntelliRehab</top-bar> --}}
+        <div>    
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <h1>IntelliRehab</h1>
+                    </div>
+                    <div class="d-flex flex-column text-muted"> 
+            
+                        <div>{{ Auth::user()->firstname }} {{  Auth::user()->lastname }}</div>
+                        <div>{{ Auth::user()->level }}</div>
+                        
+                    </div>      
+                </div>
+            </nav>
+        </div> 
+        {{-- <side-bar></side-bar> --}}
+        <div id="test" class= "sidebar-container">';
+            <div class="w3-sidebar w3-bar-block w3-small  w3-center "  style="width:8%">
+    
+             <div > 
+            <a href="{adminlink}" class="w3-bar-item w3-button w3-padding-large" >
+            <i class="fa fa-home w3-xlarge"></i>
+            <p>HOME</p>
+            </a>
+            </div>  
+            
+            <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-black" >
+            <i class="fa fa-wheelchair w3-xlarge"></i>
+            <p>PATIENT</p>
+            </a>
+    
+            <a  href="{{route('admin')}}" class="w3-bar-item w3-button w3-padding-large w3-hover-black" >
+            <i class="fa fa-cogs w3-xlarge"></i>
+            <p>ADMIN</p>
+            </a>
+            
+            <a  href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-black" >
+            <i class="fa fa-sign-out w3-xlarge"></i>
+            <p>LOGOUT</p>
+            </a>
+            </div>				
+        </div>
         <main class="py-4">
             @yield('content')
         </main>

@@ -1897,7 +1897,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      hover: false
+      admin: this.model
     };
   }
 });
@@ -67366,111 +67366,10 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "sidebar-container", attrs: { id: "test" } },
-    [
-      _vm._v("';\n    "),
-      _c(
-        "div",
-        {
-          staticClass: "w3-sidebar w3-bar-block w3-small  w3-center ",
-          staticStyle: { width: "8%" }
-        },
-        [
-          _c(
-            "div",
-            {
-              class: { "w3-black": _vm.hover },
-              on: {
-                clicked: function($event) {
-                  _vm.hover = true
-                }
-              }
-            },
-            [_vm._m(0)]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "w3-bar-item w3-button w3-padding-large w3-hover-black",
-              class: { active: _vm.hover },
-              attrs: { href: "#" },
-              on: {
-                clicked: function($event) {
-                  _vm.hover = true
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fa fa-wheelchair w3-xlarge" }),
-              _vm._v(" "),
-              _c("p", [_vm._v("PATIENT")])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "w3-bar-item w3-button w3-padding-large w3-hover-black",
-              class: { active: _vm.hover },
-              attrs: { href: "#" },
-              on: {
-                clicked: function($event) {
-                  _vm.hover = true
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fa fa-cogs w3-xlarge" }),
-              _vm._v(" "),
-              _c("p", [_vm._v("ADMIN")])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "w3-bar-item w3-button w3-padding-large w3-hover-black",
-              class: { active: _vm.hover },
-              attrs: { href: "#" },
-              on: {
-                clicked: function($event) {
-                  _vm.hover = true
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fa fa-sign-out w3-xlarge" }),
-              _vm._v(" "),
-              _c("p", [_vm._v("LOGOUT")])
-            ]
-          )
-        ]
-      )
-    ]
+    [_vm._v("';\n    ")]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "w3-bar-item w3-button w3-padding-large",
-        attrs: { href: "#" }
-      },
-      [
-        _c("i", { staticClass: "fa fa-home w3-xlarge" }),
-        _vm._v(" "),
-        _c("p", [_vm._v("HOME")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
