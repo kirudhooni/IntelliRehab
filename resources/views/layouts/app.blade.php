@@ -80,6 +80,7 @@
                     <div class="navbar-header">
                         <h1>IntelliRehab</h1>
                     </div>
+                    <hr>
                     <div class="d-flex flex-column text-muted"> 
             
                         <div>{{ Auth::user()->firstname }} {{  Auth::user()->lastname }}</div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
@@ -23,7 +24,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // $user = new User();
+
+        return $this->level;
+        // return view('users.create', compact('user'));
     }
 
     /**
