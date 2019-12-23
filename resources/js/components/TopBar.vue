@@ -5,7 +5,12 @@
                 <div class="navbar-header">
                     <h1><slot></slot></h1>
                 </div>
-                
+                <div class="d-flex flex-column text-muted"> 
+                    <!-- test_username -->
+                    <div>{{ user.firstname }} {{ user.lastname }}</div>
+                    <div>{{ user.level }}</div>
+                    <!-- {{ user.level }} -->
+                </div>      
             </div>
         </nav>
     </div> 
@@ -13,8 +18,12 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        props: ['model'],
+
+        data () {
+            return {
+                user: this.model
+            }
         }
     }
 </script>

@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">
@@ -71,7 +73,8 @@
                 </div>
             </div>
         </nav> --}}
-        <top-bar>IntelliRehab</top-bar>
+        <top-bar :model ="{{Auth::user()}}">IntelliRehab</top-bar>
+        <side-bar></side-bar>
         <main class="py-4">
             @yield('content')
         </main>

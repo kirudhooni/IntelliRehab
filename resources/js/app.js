@@ -4,7 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
 require('./bootstrap');
+Vue.use(BootstrapVue)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 window.Vue = require('vue');
 
@@ -19,6 +25,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('side-bar', require('./components/SideBar.vue').default);
 Vue.component('doctor-avatar', require('./components/DoctorAvatar.vue').default);
 Vue.component('top-bar', require('./components/TopBar.vue').default);
 
