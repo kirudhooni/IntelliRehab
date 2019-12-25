@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\User;
-
+use App\Mail\Welcome;
+use App\Http\Requests\CreateEditUserRequest;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
@@ -14,7 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::paginate(20);
+
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -23,11 +28,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        // $user = new User();
+    {   
 
-        return $this->level;
-        // return view('users.create', compact('user'));
+        $this->authorize('create', User::class);
+        $user = new User();
+
+       
+        return view('users.create', compact('user'));
     }
 
     /**
@@ -36,9 +43,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEditUserRequest $request)
     {
-        //
+        
+       
+        $password = Str::random(10);
+        
+        // //\Mail::to($user)->send(new Welcome($user));
+        
+        
+        $request->user()->create(array_merge($request->all(),['password' => Hash::make($password)]));
+        return redirect()->route('users.index')->with('success', "User Created!");   
     }
 
     /**
@@ -60,7 +75,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -71,8 +87,20 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+
+        $validatedData = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'level' => 'required',
+        ]);
+
+        $user = User::find($id);
+        $user->update($request->only('firstname','lastname','email','phone','note','level'));
+
+        return redirect()->route('users.index')->with('success',"User Updated!");
     }
 
     /**
@@ -85,4 +113,16 @@ class UserController extends Controller
     {
         //
     }
+
+    public function downloadusers()
+    {
+        $users = User::all();
+
+        //return $users;
+	    $csvExporter = new \Laracsv\Export();
+
+	    return $csvExporter->build($users, ['id', 'firstname', 'lastname', 'username', 'phone', 'level','status','email','note','updated_at'])->download('Users_list.csv');
+    }
+    
+
 }

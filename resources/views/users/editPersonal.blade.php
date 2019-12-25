@@ -2,10 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h2>Add User</h2>
+    <h2>Edit User</h2>
 
 {{-- @include('layouts._validate_errors')     --}}
-<form action="{{ route('users.store')}}" method="post" class="mt-5" >
+<form action="{{ route('update-personal', $user->id)}}" method="post" class="mt-5" >
+        @method('PUT')
     @include('users._userForm')
 </form>
 </div>
