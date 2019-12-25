@@ -24,6 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminPageController@index')->name('admin');
 
 
+#groups
+Route::resource('groups', 'GroupController');
+
 #users
 Route::get('/users/downloadusers', 'UserController@downloadusers');
 Route::resource('users', 'UserController');
