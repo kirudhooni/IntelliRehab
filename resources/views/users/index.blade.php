@@ -50,7 +50,7 @@
                                             <a href="{{route('users.edit', $user->id)}}" role="button" class="btn btn-outline-dark">Edit</a>
                                     </td>
                                     <td>
-                                            <a href="#" role="button" class="btn btn-outline-dark">{{$user->status == 'active' ? 'Deactivate': 'Activate'}}</a>
+                                    <a href="{{route('users-deactivate',$user->id)}}" role="button" class="btn btn-outline-dark">{{$user->status == 'active' ? 'Deactivate': 'Activate'}}</a>
                                     </td>
                                     
                                 </tr>

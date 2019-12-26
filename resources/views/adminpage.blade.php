@@ -13,6 +13,8 @@
         <label class="col-md-2 col-form-label" ><h2 class="text-center">Groups</h2></label>
         <a class="btn btn-primary col-md-2 mr-5 my-2 text-center" style="border-radius:30px" href="{{route('groups.create')}}" role="button">Add</a>
         <a class="btn btn-primary col-md-2 mr-5 my-2 text-center" style="border-radius:30px" href="{{route('groups.index')}}" role="button">View/Edit</a>
+        <a class="btn btn-primary col-md-2 mr-5 my-2 text-center" style="border-radius:30px" href="{{route('groups-manage')}}" role="button">Manage</a>
+        <a class="btn btn-primary col-md-2 mr-5 my-2 text-center" style="border-radius:30px" role="button" href="/groups/downloadgroups">Download Groups</a>
     </div>
 
     @can('create', Auth::user())

@@ -14,7 +14,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        $groups = Group::paginate(20);
+
+        return view('groups.index', compact('groups'));
     }
 
     /**
@@ -41,7 +43,12 @@ class GroupController extends Controller
             
         ]);
 
-        $request->group()->create($request->all());
+        $group = new Group;
+
+        $group->name = $request->name;
+        $group->description = $request->description;
+
+        $group->save();
         
         return redirect()->route('groups.index')->with('success', "Group Created!");  
     }
@@ -63,14 +70,12 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit($id)
     {   
-        $validatedData = $request->validate([
-            'name' => 'required',
-            
-        ]);
+        
         $group = Group::find($id);
         return view('groups.edit',compact('group'));
+       
     }
 
     /**
@@ -80,10 +85,18 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
-    {
+    public function update(Request $request, Group $id)
+    {   
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            
+        ]);
         $group = Group::find($id);
-        $group->update($request->all());
+        $group->name = $request->name;
+        $group->description = $request->description;
+
+        $group->save();
 
         return redirect()->route('groups.index')->with('success',"Group Updated!");
     }
@@ -97,5 +110,48 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         //
+    }
+
+    public function downloadgroups()
+    {
+        $groups = Group::all();
+
+        //return $users;
+	    $csvExporter = new \Laracsv\Export();
+
+	    return $csvExporter->build($groups, ['id', 'name', 'description', 'status','updated_at'])->download('Groups_list.csv');
+    }
+
+    public function deactivate($id)
+    {
+        $group = Group::find($id);
+        if($group ->status == 'active'){
+            $group ->status = 'inactive';
+            $group ->save();
+            return redirect()->route('groups.index')->with('success',"Group Deactivated!");
+        }
+        else{
+            $group ->status = 'active';
+            $group ->save();
+            return redirect()->route('groups.index')->with('success',"Group Activated!");
+        }
+    }
+
+    public function manage()
+    {   
+        
+        return view('groups.manage');
+    }
+
+    public function getGroups()
+    {
+        $groups = Group::get();
+        return response()->json($groups);
+    }
+
+    public function getUsers()
+    {
+        $groups = [];
+        return response()->json($groups);
     }
 }

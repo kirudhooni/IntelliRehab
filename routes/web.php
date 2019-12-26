@@ -25,10 +25,17 @@ Route::get('/admin', 'AdminPageController@index')->name('admin');
 
 
 #groups
+Route::get('/groups/downloadgroups', 'GroupController@downloadgroups');
+Route::get('/groups/getUsers/{id}', 'GroupController@getUsers');
+Route::get('/groups/{id}/deactivate', 'GroupController@deactivate')->name('groups-deactivate');
+Route::get('/groups/manage', 'GroupController@manage')->name('groups-manage');
+Route::get('/groups/getGroups', 'GroupController@getGroups');
 Route::resource('groups', 'GroupController');
 
 #users
+Route::get('/users/getAllUsers', 'UserController@getAllUsers');
 Route::get('/users/downloadusers', 'UserController@downloadusers');
+Route::get('/users/{id}/deactivate', 'UserController@deactivate')->name('users-deactivate');
 Route::resource('users', 'UserController');
 
 #personal

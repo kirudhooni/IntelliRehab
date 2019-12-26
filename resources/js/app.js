@@ -14,6 +14,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 window.Vue = require('vue');
 
+window.Event = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -25,10 +26,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('side-bar', require('./components/SideBar.vue').default);
-Vue.component('doctor-avatar', require('./components/DoctorAvatar.vue').default);
-Vue.component('top-bar', require('./components/TopBar.vue').default);
 
+Vue.component('doctor-avatar', require('./components/DoctorAvatar.vue').default);
+Vue.component('dual-listbox', require('./components/DualListBox.vue').default);
+Vue.component('dynamic-selectbox', require('./components/DynamicSelectBox.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

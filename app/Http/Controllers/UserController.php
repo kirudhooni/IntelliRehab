@@ -123,6 +123,30 @@ class UserController extends Controller
 
 	    return $csvExporter->build($users, ['id', 'firstname', 'lastname', 'username', 'phone', 'level','status','email','note','updated_at'])->download('Users_list.csv');
     }
+
+    public function deactivate($id)
+    {
+        $user = User::find($id);
+
+        if($user ->status == 'active'){
+            $user ->status = 'inactive';
+            $user ->save();
+        
+            return redirect()->route('users.index')->with('success',"User Deativated!");
+        }
+        else{
+            $user ->status = 'active';
+            $user ->save();
+        
+            return redirect()->route('users.index')->with('success',"User Activated!");
+        }
+    }
+
+    public function getUsersInGroup()
+    {
+        $users = App\User::doesntHave('group_id',1);
+        return response()->json($users);
+    }
     
 
 }

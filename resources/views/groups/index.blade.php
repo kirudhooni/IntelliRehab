@@ -42,7 +42,7 @@
                                             <a href="{{route('groups.edit', $group->id)}}" role="button" class="btn btn-outline-dark">Edit</a>
                                     </td>
                                     <td>
-                                            <a href="#" role="button" class="btn btn-outline-dark">{{$group->status == 'active' ? 'Deactivate': 'Activate'}}</a>
+                                            <a href="{{route('groups-deactivate', $group->id)}}" role="button" class="btn btn-outline-dark">{{$group->status == 'active' ? 'Deactivate': 'Activate'}}</a>
                                     </td>
                                     
                                 </tr>
