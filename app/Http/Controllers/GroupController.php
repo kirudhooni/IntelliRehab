@@ -149,9 +149,5 @@ class GroupController extends Controller
         return response()->json($groups);
     }
 
-    public function getUsers()
-    {
-        $groups = [];
-        return response()->json($groups);
-    }
+    
 }

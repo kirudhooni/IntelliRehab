@@ -142,9 +142,16 @@ class UserController extends Controller
         }
     }
 
-    public function getUsersInGroup()
+    public function getUsersNotInGroup($id)
     {
-        $users = App\User::doesntHave('group_id',1);
+        $users = User::whereDoesntHave('groups',function ($query) use($id){$query->where('id',$id);})->get();
+        return response()->json($users);
+        
+    }
+
+    public function getUsersInGroup($id)
+    {
+        $users = User::whereHas('groups',function ($query) use($id){$query->where('id',$id);})->get();
         return response()->json($users);
     }
     

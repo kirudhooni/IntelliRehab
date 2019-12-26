@@ -1932,40 +1932,6 @@ __webpack_require__.r(__webpack_exports__);
           this.list2.splice(del, 1);
         }
       }
-    },
-    usersNotInGroup: function usersNotInGroup(usersInGroup) {
-      var allUsers = [];
-      axios.get('/users/getAllUsers').then(function (response) {
-        this.allUsers = response.data;
-      }.bind(this));
-      this.list2 = arr_diff(usersInGroup, allUsers);
-    },
-    onRecieveGroup: function onRecieveGroup(groupID) {
-      axios.get('/groups/getUsers' + groupID).then(function (response) {
-        this.list2 = response.data;
-      }.bind(this));
-    },
-    arr_diff: function arr_diff(a1, a2) {
-      var a = [],
-          diff = [];
-
-      for (var i = 0; i < a1.length; i++) {
-        a[a1[i]] = true;
-      }
-
-      for (var i = 0; i < a2.length; i++) {
-        if (a[a2[i]]) {
-          delete a[a2[i]];
-        } else {
-          a[a2[i]] = true;
-        }
-      }
-
-      for (var k in a) {
-        diff.push(k);
-      }
-
-      return diff;
     }
   },
   created: function created() {
@@ -1975,36 +1941,16 @@ __webpack_require__.r(__webpack_exports__);
       _this.allUsers = [];
       _this.list1 = [];
       _this.list2 = [];
-      axios.get('/groups/getUsers/' + group).then(function (response) {
+      axios.get('/users/getUsersInGroup/' + group).then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          _this.list1.push(response.data[i].firstname);
+        }
+      });
+      axios.get('/users/getUsersNotInGroup/' + group).then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           _this.list2.push(response.data[i].firstname);
         }
       });
-      axios.get('/users/getAllUsers').then(function (response) {
-        for (var i = 0; i < response.data.length; i++) {
-          _this.allUsers.push(response.data[i].firstname);
-        }
-      });
-      var array1 = _this.allUsers;
-      var array2 = _this.list2;
-      console.log(array1);
-      var temp = [];
-      array1 = array1.toString().split(',').map(Number);
-      array2 = array2.toString().split(',').map(Number);
-
-      for (var i in array1) {
-        if (array2.indexOf(array1[i]) === -1) temp.push(array1[i]);
-      }
-
-      for (i in array2) {
-        if (array1.indexOf(array2[i]) === -1) temp.push(array2[i]);
-      }
-
-      temp.sort(function (a, b) {
-        return a - b;
-      });
-      console.log(temp);
-      _this.list1 = temp;
     });
   }
 });
@@ -67501,25 +67447,29 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block mb-2",
-            on: { click: _vm.oneToRight }
-          },
-          [_vm._v("»")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block mb-2",
-            on: { click: _vm.oneToLeft }
-          },
-          [_vm._v("«")]
-        )
-      ]),
+      _c(
+        "div",
+        { staticClass: "col-md-2", staticStyle: { "margin-top": "100px" } },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger btn-block mb-2",
+              on: { click: _vm.oneToRight }
+            },
+            [_vm._v("»")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-block mb-2",
+              on: { click: _vm.oneToLeft }
+            },
+            [_vm._v("«")]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c(
